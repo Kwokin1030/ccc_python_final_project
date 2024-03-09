@@ -1,0 +1,124 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{% static 'css/styles.css' %}">
+    <link href="https://unpkg.com/nes.css@latest/css/nes.min.css" rel="stylesheet" />
+    <title>Pokedex</title>
+</head>
+<header>
+    <p>welcome</p>
+</header>
+
+<body>
+    <div class="nav">
+        <br>
+        <h2>Pick your pokemon here!</h2>
+        <form class="search_bar" method="POST" action="/pokedex/dex/">
+            {% csrf_token %}
+            <input class="nes-input" type="text" name="textfield" placeholder="Input Name / Id" size="3">
+            <button class="nes-btn is-success" type="submit">Search</button>
+        </form>
+
+        <form method="POST" action="/pokedex/dex/">
+            {% csrf_token %}
+            <button class="nes-btn is-warning myButton" type="submit" name="textfield" value="random">Random!</button>
+        </form>
+
+        <form class="myContainer" method="POST" action="/pokedex/dex/">
+            {% csrf_token %}
+            <button class="nes-btn" type="submit" name="textfield" value="gen1">Gen1</button>
+            <button class="nes-btn is-primary" type="submit" name="textfield" value="gen2">Gen2</button>
+            <button class="nes-btn is-error" type="submit" name="textfield" value="gen3">Gen3</button>
+        </form>
+    </div>
+
+    <br>
+
+    <div class="center">
+        <div class="nes-container with-title is-centered">
+            <p class="title">You Choose...</p>
+            {%if Name%}
+            <img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/{{Id}}.png"
+                alt="pokemon_pic" width="200" height="200">
+
+            <div class="nes-container is-dark with-title">
+                <p class="title">PKMID {{Id}}</p>
+                <p>{{Name}}</p>
+                <div class="context">
+                    <p>{{Description}}</p>
+                    <div class="scroll_triangle">▽</div>
+                    <br>
+                    <p>Height {{Height}} m</p>
+                    <p>Weight {{Weight}} kg</p>
+                    <br>
+                    <p>Abilities</p>
+                    <ul>
+                        {%for x in Abilities%}
+                        <li>{{x}}</li>
+                        {%endfor%}
+                    </ul>
+
+                    <p>Type</p>
+                    <ul>
+                        {%for x in Types%}
+                        {%if x == 'normal'%}
+                        <li style="color:#A8A77A;">{{x}}</li>
+                        {%elif x == 'fire'%}
+                        <li style="color:#EE8130;">{{x}}</li>
+                        {%elif x == 'water'%}
+                        <li style="color:#6390F0;">{{x}}</li>
+                        {%elif x == 'electric'%}
+                        <li style="color:#F7D02C;">{{x}}</li>
+                        {%elif x == 'grass'%}
+                        <li style="color:#7AC74C;">{{x}}</li>
+                        {%elif x == 'ice'%}
+                        <li style="color:#96D9D6;">{{x}}</li>
+                        {%elif x == 'fighting'%}
+                        <li style="color:#C22E28;">{{x}}</li>
+                        {%elif x == 'poison'%}
+                        <li style="color:#A33EA1;">{{x}}</li>
+                        {%elif x == 'ground'%}
+                        <li style="color:#E2BF65;">{{x}}</li>
+                        {%elif x == 'flying'%}
+                        <li style="color:#A98FF3;">{{x}}</li>
+                        {%elif x == 'psychic'%}
+                        <li style="color:#F95587;">{{x}}</li>
+                        {%elif x == 'bug'%}
+                        <li style="color:#A6B91A;">{{x}}</li>
+                        {%elif x == 'rock'%}
+                        <li style="color:#B6A136;">{{x}}</li>
+                        {%elif x == 'ghost'%}
+                        <li style="color:#735797;">{{x}}</li>
+                        {%elif x == 'dragon'%}
+                        <li style="color:#6F35FC;">{{x}}</li>
+                        {%elif x == 'dark'%}
+                        <li style="color:#705746;">{{x}}</li>
+                        {%elif x == 'steel'%}
+                        <li style="color:#B7B7CE;">{{x}}</li>
+                        {%elif x == 'fairy'%}
+                        <li style="color:#D685AD;">{{x}}</li>
+                        {%else%}
+                        <li>{{x}}</li>
+                        {%endif%}
+                        {%endfor%}
+                    </ul>
+
+                    {%else%}
+                    <p>??</p>
+                    {%endif%}
+                </div>
+            </div>
+        </div>
+    </div>
+    </div>
+    <br>
+</body>
+<footer>
+    <p>welcome</p>
+</footer>
+
+</html>
